@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { connect } from '../../data/connection';
-import User from '../../data/models/User';
+import { connect } from '../../lib/connection';
+import User from '../../lib/models/User';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
