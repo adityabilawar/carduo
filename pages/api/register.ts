@@ -4,6 +4,7 @@ import User from '../../data/models/User';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
+  const data = JSON.parse(req.body);
 
   // connecting to db
   await connect();
@@ -11,10 +12,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // using method to run database check/update
   if(method=='POST') {
     // checking if name already exists
-    if((await User.find({name: req.body.name})).length > 0)
+    if((await User.find({name: data.name})).length > 0)
       return res.status(400).json({ error: 'user already exists' });
     
-    return res.json(await User.create(req.body)); // register
+    return res.json(await User.create(data)); // register
   }
   else return res.status(400).json({ error: 'invalid request' }); // invalid req. error
 }
