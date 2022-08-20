@@ -1,6 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from "next/link"
+
 const Login = () => {
+
+    const [name, setName] = useState('');
+
+    const handleLogin = e => {
+        e.preventDefault();
+    }
+
     return (
         <>
             <div className="flex justify-center items-center h-screen">
@@ -12,11 +20,16 @@ const Login = () => {
                     <div className="flex flex-col space-y-8">
                         <div>
                             <p>Username</p>
-                            <input type="text" placeholder="Username" />
+                            <input
+                                type="text"
+                                placeholder="Enter your username"
+                                onChange={e => setName(e.target.value)}
+                                value={name}
+                            />
                         </div>
                         <div>
                             <p>Password</p>
-                            <input type="text" placeholder="Username" />
+                            <input type="text" placeholder="Create your password" />
                         </div>
                         <Link href="#">
                             <button className='btn text-white'>
