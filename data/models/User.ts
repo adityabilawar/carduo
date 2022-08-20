@@ -7,4 +7,4 @@ const UserSchema = new mongoose.Schema({
 });
 
 // create model if doesnt already exist in cache; make it default export
-export const UserModel = mongoose.models.User || mongoose.model('users', UserSchema);
+export const UserModel = mongoose.models.users || mongoose.model('users', UserSchema);
