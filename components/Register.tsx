@@ -40,14 +40,14 @@ const Register = () => {
         // use api to register user
         const res = await fetch(`/api/register`, {
             method: 'POST',
-            body: JSON.stringify({regName,regPassword})
+            body: JSON.stringify({name:regName,password:regPassword})
         });
         const data = await res.json();
 
         // error handler
         if(data.name) {
             // setting auth
-            localStorage.setItem('auth', JSON.stringify({regName,regPassword}));
+            localStorage.setItem('auth', JSON.stringify({name:regName,password:regPassword}));
             router.push('/dashboard');
         } else {
             // send error message here
