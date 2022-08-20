@@ -1,14 +1,14 @@
-import type { NextPage } from 'next'
+import React from 'react'
 import Register from '../components/Register'
 import UnauthNavbar from '../components/UnauthNavbar'
 
-const Home: NextPage = () => {
+const Index = () => {
   return (
     <div>
-      <UnauthNavbar />
-      <Register />
+        <UnauthNavbar />
+        <Register />
     </div>
   )
 }
 
-export default Home
+export default Index
