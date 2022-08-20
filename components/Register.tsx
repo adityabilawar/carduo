@@ -25,7 +25,7 @@ const Register = () => {
         const data = await res.json();
 
         // error handler
-        if(data.name) {
+        if(data.length > 0) {
             // setting auth
             localStorage.setItem('auth', JSON.stringify({name,password}));
             router.push('/dashboard');

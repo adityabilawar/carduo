@@ -22,7 +22,9 @@ const Navbar = () => {
             </li>
             <li>
                 <Link href="/register">
-                    <button className="bg-[#EE5253] text-white inline-flex justify-center w-full rounded-md shadow-sm px-8 py-2 text-sm font-medium hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500">
+                    <button className="bg-[#EE5253] text-white inline-flex justify-center w-full rounded-md shadow-sm px-8 py-2 text-sm font-medium hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500"
+                        onClick={(e) => localStorage.clear()}
+                    >
                         Logout
                     </button>
                 </Link>
