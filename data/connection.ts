@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 // getting mongodb connection uri from .env
 const { MONGODB_URI } = process.env;
+console.log(MONGODB_URI);
 if(!MONGODB_URI) throw new Error('MONGODB_URI undefined; Cannot connect to database');
 
 // database connection func
