@@ -1,33 +1,23 @@
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Content from '../components/Dashboard/Content'
 import Navbar from '../components/Navbar'
-import Register from '../components/Register'
-import UnauthNavbar from '../components/UnauthNavbar'
 import { isUserAuth } from '../utils/auth'
 
 // index page (/)
 const Home: NextPage = () => {
-  const [auth, setAuth] = useState(false);
-  useEffect(() => setAuth(true))
-  if(auth)
-    return (
-      <>
-        {/* Conditional Rendering for Authentication */}
-        {(isUserAuth(localStorage)) ?
-            <div>
-              <Navbar />
-              <Content/>
-            </div>
-          :
-            <div>
-              <UnauthNavbar />
-              <Register/>
-            </div>
-        }
-      </>
-    );
-  else return (<></>);
+  const router = useRouter();
+  useEffect(() => {
+    if(!isUserAuth(localStorage)) router.push('/register');
+  });
+
+  return (
+    <div>
+        <Navbar />
+        <Content />
+    </div>
+  )
 }
 
 export default Home
