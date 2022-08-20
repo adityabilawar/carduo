@@ -16,3 +16,24 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.btn {
+  background: #F43A3B;
+  width: 375px;
+  height: 50px;
+  transition: ease-out 0.3s;
+}
+
+.btn:hover {
+  box-shadow: inset 400px 0 0 0 #F55152;
+}
+
+input {
+  border: 2px solid black;
+  background: none;
+  padding: 10px 150px 10px 20px;
+}
+
+input:focus {
+  outline: none;
+}
