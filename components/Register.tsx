@@ -18,7 +18,7 @@ const Register = () => {
         e.preventDefault();
 
         // using api to login user
-        const res = await fetch(`${URL}/api/login`, {
+        const res = await fetch(`/api/login`, {
             method: 'POST',
             body: JSON.stringify({name,password})
         });
@@ -38,7 +38,7 @@ const Register = () => {
         e.preventDefault();
 
         // use api to register user
-        const res = await fetch(`${URL}/api/register`, {
+        const res = await fetch(`/api/register`, {
             method: 'POST',
             body: JSON.stringify({regName,regPassword})
         });
