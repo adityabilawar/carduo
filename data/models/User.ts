@@ -6,5 +6,5 @@ const UserSchema = new mongoose.Schema({
 	password: String
 });
 
-// create model if doesnt already exist in cache
-module.exports = mongoose.models.User || mongoose.model('users', UserSchema);
+// create model if doesnt already exist in cache; make it default export
+export const UserModel = mongoose.models.User || mongoose.model('users', UserSchema);
