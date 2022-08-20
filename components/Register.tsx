@@ -29,7 +29,7 @@ const Register = () => {
             <div className="flex justify-center items-center h-screen">
                 <div className="flex flex-col items-start space-y-8">
                     <div className="flex flex-col">
-                        <p className="mb-3">Don't have an account?</p>
+                        <p className="mb-3">Don&apos;t have an account?</p>
                         <h1 className="text-5xl font-bold">Register</h1>
                     </div>
                     <div className="flex flex-col space-y-8">
