@@ -8,11 +8,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // connecting to db
   await connect();
 
-  // error handling function
-  const catcher = (error: Error) => res.status(400).json({ error });
-
   // using method to validate request
   if(method=='POST')
-    return res.json(await User.find(req.body).catch(catcher)); // login
+    return res.json(await User.find(req.body)); // login
   else return res.status(400).json({ error: 'invalid request' }); // invalid req. error
 }
