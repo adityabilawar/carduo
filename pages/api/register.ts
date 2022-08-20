@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if((await User.find({name: req.body.name})).length > 0)
       return res.status(400).json({ error: 'user already exists' });
     
-    return res.json(await User.create(req.body).catch(catcher)); // register
+    else return res.json(await User.create(req.body).catch(catcher)); // register
   }
   else return res.status(400).json({ error: 'invalid request' }); // invalid req. error
 }
