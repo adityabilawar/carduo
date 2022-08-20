@@ -31,7 +31,7 @@ const Login = () => {
                             <p>Password</p>
                             <input type="text" placeholder="Create your password" />
                         </div>
-                        <Link href="#">
+                        <Link href="/dashboard">
                             <button className='btn text-white'>
                                 Sign in
                             </button>
