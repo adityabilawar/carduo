@@ -1,12 +1,22 @@
 import React, { useState } from 'react'
 import Link from "next/link"
 
+const URL = 'https://carduo.vercel.app/';
+
 const Login = () => {
 
     const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
 
-    const handleLogin = e => {
+    const handleLogin = async(e) => {
         e.preventDefault();
+
+        const res = await fetch(`${URL}/api/login`, {
+            method: 'POST',
+            body: JSON.stringify({
+
+            })
+        })
     }
 
     return (
@@ -29,10 +39,15 @@ const Login = () => {
                         </div>
                         <div>
                             <p>Password</p>
-                            <input type="text" placeholder="Create your password" />
+                            <input
+                                type="text"
+                                placeholder="Enter your password"
+                                onChange={e => setName(e.target.value)}
+                                value={name}
+                            />
                         </div>
                         <Link href="/dashboard">
-                            <button className='btn text-white'>
+                            <button className='btn text-white' onClick={handleLogin}>
                                 Sign in
                             </button>
                         </Link>
