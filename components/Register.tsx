@@ -38,8 +38,8 @@ const Register = () => {
         e.preventDefault();
 
         // use api to register user
-        const res = await fetch(`${URL}/api/login`, {
-            method: 'GET',
+        const res = await fetch(`${URL}/api/register`, {
+            method: 'POST',
             body: JSON.stringify({regName,regPassword})
         });
         const data = await res.json();
