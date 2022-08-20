@@ -21,7 +21,7 @@ const Content = () => {
           <h1 className="text-2xl">My Decks</h1>
           <div className="mt-10 flex flex-wrap">
             {DATA.map((deck, index) => (
-                <Deck {...deck} cardCount={5} color="#DC3546" key={index} />
+                <Deck deck={deck} color="#DC3546" key={index} />
             ))}
           </div>
         </section>
