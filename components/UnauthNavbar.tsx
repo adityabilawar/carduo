@@ -1,10 +1,4 @@
 import React from 'react'
-import Dropdown from './Dropdown'
-
-const menuItems = {
-    title: "Customize",
-    items: ["SQ3R Method", "Spaced repetition", "PQ4R Method", "Feynman Technique"],
-}
 
 const UnauthNavbar = () => {
   return (

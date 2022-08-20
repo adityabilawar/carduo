@@ -1,4 +1,7 @@
 import Deck from "./Deck"
+import React, { useState, useEffect } from 'react'
+import data from "../../data/decks.json"
+
 
 const cardProps = {
     status: "Need more practice",
@@ -8,24 +11,16 @@ const cardProps = {
 }
 
 const Content = () => {
+    console.log(data);
   return (
     <div className="flex-1 flex items-stretch overflow-hiddenz-[-10]">
       <main className="flex-1 overflow-y-auto h-screen">
         <section aria-labelledby="primary-heading" className="p-10 min-w-0 flex-1 h-full flex flex-col lg:order-last">
           <h1 className="text-2xl">My Decks</h1>
           <div className="mt-10 flex flex-wrap">
-            <Deck {...cardProps} />
-            <Deck {...cardProps} />
-            <Deck {...cardProps} />
-            <Deck {...cardProps} />
-            <Deck {...cardProps} />
-            <Deck {...cardProps} />
-            <Deck {...cardProps} />
-            <Deck {...cardProps} />
-            <Deck {...cardProps} />
-            <Deck {...cardProps} />
-            <Deck {...cardProps} />
-            <Deck {...cardProps} />
+            {data.decks.map((deck, index) => (
+                <Deck {...deck} cardCount={5} color="#DC3546" key={index} />
+            ))}
           </div>
         </section>
       </main>
