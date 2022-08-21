@@ -12,7 +12,6 @@ const Deck = (props: { deck: DeckData, color: string }) => {
           </div>
           <div className="border-t-2 border-[#AD0000] pt-5 text-white flex space-x-5 text-sm">
             <button>Study</button>
-            <button>Edit Deck</button>
             <button>Teach It</button>
           </div>
       </div>
