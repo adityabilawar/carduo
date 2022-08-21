@@ -51,5 +51,5 @@
     "**/*.tsx",
     "next.config.js",
     "lib/ga/index.js"
-  ]
+, "pages/room.jsx"  ]
 }
