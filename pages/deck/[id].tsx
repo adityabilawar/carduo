@@ -15,6 +15,7 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
   const [shuffledDeck, setDeck] = useState(deck.questions);
   const [cardIndex, setCardIndex] = useState(0);
   const [answer, setAnswer] = useState('');
+  const [isFinished, setIsFinished] = useState(false);
   const [statData, setStatData] = useState({
     correct: 0,
     incorrect: 0,
@@ -45,7 +46,7 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
     }
     setAnswer('');
     if(cardIndex == shuffledDeck.length-1) {
-      console.log('wowie ur done');
+      setIsFinished(true);
     }
     else {
       setCardIndex(cardIndex+1);
@@ -54,7 +55,7 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
   
   return (
     <div>
-        <EndQuiz />
+        {isFinished && <EndQuiz {...statData} />}
         <Navbar />
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col justify-center">
             <h1 className="text-xl my-10">12 cards remaining</h1>
