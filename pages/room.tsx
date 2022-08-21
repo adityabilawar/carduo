@@ -17,7 +17,6 @@ const Room = () => {
       console.log('socket connected from client');
     });
     socket.on('chat', (data) => {
-      if(data.user == user) return;
       const newChatLogs = chatLogs;
       newChatLogs.push(data);
       setChatLogs(newChatLogs);
@@ -27,9 +26,6 @@ const Room = () => {
   const sendMessage = (e) => {
     e.preventDefault();
     
-    const newChatLogs = chatLogs;
-    newChatLogs.push({user, text});
-    setChatLogs(newChatLogs);
     socket.emit('chat', { user, text });
   }
 
