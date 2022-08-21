@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react'
+import EndQuiz from '../../components/EndQuiz';
 import Navbar from '../../components/Navbar';
 import { isUserAuth } from '../../utils/auth';
 
@@ -17,6 +18,7 @@ const Deck = ({title, answer}: question) => {
   
   return (
     <div>
+        <EndQuiz />
         <Navbar />
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col justify-center">
             <h1 className="text-xl my-10">12 cards remaining</h1>
