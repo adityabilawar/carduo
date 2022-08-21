@@ -5,6 +5,8 @@ import { isUserAuth } from '../utils/auth'
 
 // index page (/)
 const Home: NextPage = () => {
+
+  // auth check
   const router = useRouter();
   useEffect(() => {
     if(!isUserAuth(localStorage)) router.push('/register');

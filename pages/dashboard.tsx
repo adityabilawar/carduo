@@ -4,8 +4,10 @@ import Content from '../components/Dashboard/Content'
 import Navbar from '../components/Navbar'
 import { isUserAuth } from '../utils/auth'
 
+// dashboard page
 const Dashboard = () => {
 
+  // auth check
   const router = useRouter();
   useEffect(() => {
     if(!isUserAuth(localStorage)) router.push('/register');

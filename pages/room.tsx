@@ -4,6 +4,7 @@ import io, { Socket } from "socket.io-client"
 import Link from 'next/link';
 
 let socket: Socket;
+// WILL IMPLEMENT VIDEO CHAT FOR TEACHING IN THE FUTURE
 const Room = () => {
 
   const [user, setUser] = useState('');

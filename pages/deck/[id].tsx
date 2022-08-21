@@ -8,6 +8,7 @@ import data from '../../data/decks.json';
 import { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 const deckJSON = data as DeckData[];
 
+// quiz page (/deck/[id])
 const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
   
   const router = useRouter();
@@ -17,13 +18,14 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
   const [bool, setBool] = useState(true);
   const [answer, setAnswer] = useState('');
   const [isFinished, setIsFinished] = useState(false);
-  const [statData, setStatData] = useState({
+  const [statData, setStatData] = useState({ // statistic data (passed down to EndQuiz comp.)
     correct: 0,
     incorrect: 0,
     incorrectCards: [],
     inputs: []
   });
 
+  // auth check + deck shuffle
   useEffect(() => {
     if(!isUserAuth(localStorage)) router.push('/register');
     if(bool) {
@@ -32,6 +34,7 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
     }
   }, [shuffledDeck]);
 
+  // submit answer handler (changes stats, checked if finished, goes to next card)
   const submitAnswer = () => {
     if(answer == shuffledDeck[cardIndex].answer) {
       const newStats = {...statData};
@@ -80,11 +83,12 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
   )
 }
 
-// shuffle array - Simple Sort Algorithm
+// shuffle array - Simple Randomized Sort Algorithm
 const shuffle = (arr: Card[]) => {
   return arr.sort(() => Math.random() - 0.5);
 }
 
+// for id query data
 export const getServerSideProps: GetServerSideProps = async(context) => {
   return { props: { id: context.query.id } };
 }

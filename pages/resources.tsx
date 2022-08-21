@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 
+// custom css text page (no functionality needed) /resources
 const Resources = () => {
   return (
     <div>
