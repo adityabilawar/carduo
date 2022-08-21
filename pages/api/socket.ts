@@ -1,11 +1,12 @@
 import { Server} from 'socket.io';
 import type { NextApiRequest } from 'next'
 
-let roomUsers = 0;
 const socketHandler = (req: NextApiRequest, res: any) => {
 	if(!res.socket.server.io) {
 		const io = new Server(res.socket.server);
 		
+		// buggy when self-hosted, can easily be improved in the future
+		// ^ even with video and audio chat
 		io.on('connection', socket => {
 			console.log('socket connection from server');
 
