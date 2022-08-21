@@ -1,25 +1,16 @@
 import { Server} from 'socket.io';
 import type { NextApiRequest } from 'next'
 
+let roomUsers = 0;
 const socketHandler = (req: NextApiRequest, res: any) => {
 	if(!res.socket.server.io) {
 		const io = new Server(res.socket.server);
 		
-		io.on("connection", (socket) => {
-			socket.emit("me", socket.id)
-		
-			socket.on("disconnect", () => {
-				socket.broadcast.emit("roomEnded")
-			})
+		io.on('connection', socket => {
+			console.log('socket connection from server');
 
-			socket.on("roomUser", (data) => {
-				io.to(data.userToCall).emit("roomUser", { signal: data.signalData, from: data.from, name: data.name })
-			})
-		
-			socket.on("join", (data) => {
-				io.to(data.to).emit("roomJoined", data.signal)
-			})
-		})
+			socket.on('chat', (data) => socket.broadcast.emit('chat', data));
+		});
 
 		res.socket.server.io = io;
 	}
