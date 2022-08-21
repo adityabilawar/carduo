@@ -1,19 +1,55 @@
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar';
+import { Card, DeckData } from '../../data/Deck';
 import { isUserAuth } from '../../utils/auth';
+import data from '../../data/decks.json';
+import { InferGetServerSidePropsType, GetServerSideProps } from 'next';
+const deckJSON = data as DeckData[];
 
-interface question {
-    title: string;
-    answer: string;
-}
-
-const Deck = ({title, answer}: question) => {
+const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
   
   const router = useRouter();
+  const deck = deckJSON[id];
+  const [shuffledDeck, setDeck] = useState(deck.questions);
+  const [cardIndex, setCardIndex] = useState(0);
+  const [answer, setAnswer] = useState('');
+  const [statData, setStatData] = useState({
+    correct: 0,
+    incorrect: 0,
+    incorrectCards: [],
+    incorrectInputs: []
+  });
+
   useEffect(() => {
     if(!isUserAuth(localStorage)) router.push('/register');
-  });
+    console.log('WOW');
+    if(shuffledDeck != deck.questions) setDeck(shuffle(deck.questions));
+  }, []);
+
+  const submitAnswer = () => {
+    if(answer == shuffledDeck[cardIndex].answer) {
+      const newStats = {...statData};
+      newStats.correct = statData.correct+1;
+      setStatData(newStats);
+      console.log(statData);
+    }
+    else {
+      const newStats = {...statData};
+      newStats.incorrect = statData.incorrect+1;
+      newStats.incorrectCards.push(cardIndex);
+      newStats.incorrectInputs.push(answer);
+      setStatData(newStats);
+      console.log(statData);
+    }
+    setAnswer('');
+    if(cardIndex == shuffledDeck.length-1) {
+      console.log('wowie ur done');
+    }
+    else {
+      setCardIndex(cardIndex+1);
+    }
+  }
   
   return (
     <div>
@@ -26,22 +62,26 @@ const Deck = ({title, answer}: question) => {
                 </div>
                 <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-[200px] lg:px-8">
                     <h1 className="text-center text-3xl tracking-tight sm:text-4xl lg:text-5xl">
-                        <span className="block text-black">What is an algorithm?</span>
+                        <span className="block text-black">{shuffledDeck[cardIndex].question}</span>
                     </h1>
                 </div>
             </div>
             <div className="flex justify-center items-center mt-20">
-                <input className="bg-white border border-gray-300 focus:border-gray-500 w-full" placeholder="Your answer..." />
-                <button className="w-[200px] flex justify-center items-center bg-red-500  h-[46px]">Submit</button>
+                <input className="bg-white border border-gray-300 focus:border-gray-500 w-full" placeholder="Enter your answer" onChange={(e) => setAnswer(e.target.value)} value={answer} />
+                <button className="w-[200px] flex justify-center items-center bg-red-500 text-white  h-[46px]" onClick={submitAnswer} >Submit</button>
             </div>
         </div>
     </div>
   )
 }
 
-// const getServerSideProps = (context) => {
-//     console.log(context);
-//     return { props: {} }
-// }
+// shuffle array - Simple Sort Algorithm
+const shuffle = (arr: Card[]) => {
+  return arr.sort(() => Math.random() - 0.5);
+}
 
-export default Deck;
+export const getServerSideProps: GetServerSideProps = async(context) => {
+  return { props: { id: context.query.id } };
+}
+
+export default Quiz;
