@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { Disclosure } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/outline'
+import { Card, DeckData } from '../data/Deck'
 
 
 const faqs = [
@@ -35,11 +36,11 @@ const faqs = [
     correct: number,
     incorrect: number,
     incorrectCards: number[],
-    incorrectInputs: string[]
+    inputs: string[]
   }
   
 
-const EndQuiz = (props: { stats: statData }) => {
+const EndQuiz = (props: { stats: statData, deck: Card[] }) => {
   const handleClick = () => {
     location.reload();
   }
@@ -50,13 +51,13 @@ const EndQuiz = (props: { stats: statData }) => {
             <h1 className="text-3xl">Your score: {props.stats.correct} / {props.stats.correct + props.stats.incorrect}</h1>
             <div className="relative border overflow-y-auto flex flex-wrap p-5 min-w-[80rem] max-w-[80rem] min-h-[500px] max-h-[500px]">
                 <dl className="mt-6 space-y-2 w-full">
-                    {faqs.map((faq) => (
-                    <Disclosure as="div" key={faq.question} className="pt-6">
+                    {props.deck.map((card, i) => (
+                    <Disclosure as="div" key={card.question} className="pt-6">
                         {({ open }) => (
                         <>
-                            <dt className="text-lg bg-green-100 p-5">
+                            <dt className={`text-lg ${(props.stats.incorrectCards.includes(i)) ? "bg-red-100" : "bg-green-100"} p-5`}>
                                 <Disclosure.Button className="text-left w-full flex justify-between items-start text-gray-400">
-                                    <span className="font-medium text-gray-900">{faq.question}</span>
+                                    <span className="font-medium text-gray-900">{card.question}</span>
                                     <span className="ml-6 h-7 flex items-center">
                                         <ChevronDownIcon
                                             className={classNames(open ? '-rotate-180' : 'rotate-0', 'h-6 w-6 transform')}
@@ -66,7 +67,8 @@ const EndQuiz = (props: { stats: statData }) => {
                                 </Disclosure.Button>
                             </dt>
                             <Disclosure.Panel as="dd" className="mt-2 pr-12">
-                                <p className="text-base text-gray-500">{faq.answer}</p>
+                                <p className="text-base text-gray-500">Answer: {card.answer}</p>
+                                <p className="text-base text-gray-500">Your Answer: {props.stats.inputs[i]}</p>
                             </Disclosure.Panel>
                         </>
                         )}
