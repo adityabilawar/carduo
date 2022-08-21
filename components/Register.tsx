@@ -16,6 +16,7 @@ const Register = () => {
 
     const handleLogin = async(e) => {
         e.preventDefault();
+        if(name === '' || password === '') return;
 
         // using api to login user
         const res = await fetch(`/api/login`, {
@@ -36,6 +37,7 @@ const Register = () => {
 
     const handleRegister = async(e) => {
         e.preventDefault();
+        if(regName === '' || regPassword === '') return;
 
         // use api to register user
         const res = await fetch(`/api/register`, {
