@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
+import EndQuiz from '../../components/EndQuiz';
 import Navbar from '../../components/Navbar';
 import { Card, DeckData } from '../../data/Deck';
 import { isUserAuth } from '../../utils/auth';
@@ -53,6 +54,7 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
   
   return (
     <div>
+        <EndQuiz />
         <Navbar />
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col justify-center">
             <h1 className="text-xl my-10">12 cards remaining</h1>

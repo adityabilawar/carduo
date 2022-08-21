@@ -7,13 +7,7 @@ const Resources = () => {
 
   useEffect(() => {
     fetch(
-      "https://notion-api.splitbee.io/v1/page/774b11c1a3cb4cb8910179ae1d780fa2", {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-        },
-      }
+      "https://notion-api.splitbee.io/v1/page/774b11c1a3cb4cb8910179ae1d780fa2"
     )
       .then((res) => res.json())
       .then((data) => setData(data));
