@@ -9,11 +9,15 @@ const socketHandler = (req: NextApiRequest, res: any) => {
 			socket.emit("me", socket.id)
 		
 			socket.on("disconnect", () => {
-				socket.broadcast.emit("callEnded")
+				socket.broadcast.emit("roomEnded")
+			})
+
+			socket.on("roomUser", (data) => {
+				io.to(data.userToCall).emit("roomUser", { signal: data.signalData, from: data.from, name: data.name })
 			})
 		
 			socket.on("join", (data) => {
-				io.to(data.to).emit("callJoined", data.signal)
+				io.to(data.to).emit("roomJoined", data.signal)
 			})
 		})
 
