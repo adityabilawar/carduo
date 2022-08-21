@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import React from 'react'
-import Dropdown from './Dropdown'
 
 const menuItems = {
     title: "Customize",
@@ -23,9 +22,6 @@ const Navbar = () => {
             <Link href="/resources">
                 <li className="cursor-pointer">Resources</li>
             </Link>
-            <li>
-                <Dropdown {...menuItems} />
-            </li>
             <li>
                 <Link href="/register">
                     <button className="bg-[#EE5253] text-white inline-flex justify-center w-full rounded-md shadow-sm px-8 py-2 text-sm font-medium hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500"
