@@ -49,7 +49,7 @@ const Room = () => {
 			  </div>
 			  <input className="border-gray-200 text-md" placeholder="Type here" onChange={(e) => setText(e.target.value)} value={text} />
 			  <button className="btn text-white mt-5 mx-5" onClick={(e) => sendMessage(e)}>Send</button>
-        <Link href='/desk/0'>
+        <Link href='/deck/0'>
           <button className="btn text-white mt-5">Take quiz</button>
         </Link>
 		  </div>
