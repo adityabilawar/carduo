@@ -1,7 +1,7 @@
 import Deck from "./Deck"
 import React from 'react'
 import data from "../../data/decks.json"
-import { DeckData } from "../../data/Deck";
+import { DeckData } from "../../utils/Deck";
 
 // for json data (parsed as DeckData type)
 const DATA = data as DeckData[];

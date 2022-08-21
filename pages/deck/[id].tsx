@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import EndQuiz from '../../components/EndQuiz';
 import Navbar from '../../components/Navbar';
-import { Card, DeckData } from '../../data/Deck';
+import { Card, DeckData } from '../../utils/Deck';
 import { isUserAuth } from '../../utils/auth';
 import data from '../../data/decks.json';
 import { InferGetServerSidePropsType, GetServerSideProps } from 'next';

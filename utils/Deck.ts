@@ -1,3 +1,4 @@
+// interface for deck data
 export interface DeckData {
 	id: number
 	title: string
@@ -5,6 +6,7 @@ export interface DeckData {
 	questions: Card[]
 }
 
+// interface for card data
 export interface Card {
 	id: number
 	question: string

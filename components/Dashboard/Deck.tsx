@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { DeckData } from '../../data/Deck'
+import { DeckData } from '../../utils/Deck'
 
 // deck prop -> deck data passed down from parent
 const Deck = (props: { deck: DeckData }) => {
