@@ -1,5 +1,7 @@
-import React from 'react'
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react'
 import Navbar from '../../components/Navbar';
+import { isUserAuth } from '../../utils/auth';
 
 interface question {
     title: string;
@@ -7,6 +9,12 @@ interface question {
 }
 
 const Deck = ({title, answer}: question) => {
+  
+  const router = useRouter();
+  useEffect(() => {
+    if(!isUserAuth(localStorage)) router.push('/register');
+  });
+  
   return (
     <div>
         <Navbar />
@@ -31,9 +39,9 @@ const Deck = ({title, answer}: question) => {
   )
 }
 
-const getServerSideProps = (context) => {
-    console.log(context);
-    return { props: {} }
-}
+// const getServerSideProps = (context) => {
+//     console.log(context);
+//     return { props: {} }
+// }
 
-export default Deck
+export default Deck;

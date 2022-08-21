@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import data from "../../data/decks.json"
 import { DeckData } from "../../data/Deck";
 
-const DATA: DeckData[] = data;
+const DATA = data as DeckData[];
 
 const cardProps = {
     status: "Need more practice",
