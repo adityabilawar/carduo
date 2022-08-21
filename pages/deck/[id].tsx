@@ -25,7 +25,6 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
 
   useEffect(() => {
     if(!isUserAuth(localStorage)) router.push('/register');
-    console.log('WOW');
     if(shuffledDeck != deck.questions) setDeck(shuffle(deck.questions));
   }, []);
 
@@ -34,7 +33,6 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
       const newStats = {...statData};
       newStats.correct = statData.correct+1;
       setStatData(newStats);
-      console.log(statData);
     }
     else {
       const newStats = {...statData};
@@ -42,7 +40,6 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
       newStats.incorrectCards.push(cardIndex);
       newStats.incorrectInputs.push(answer);
       setStatData(newStats);
-      console.log(statData);
     }
     setAnswer('');
     if(cardIndex == shuffledDeck.length-1) {
