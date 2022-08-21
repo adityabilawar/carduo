@@ -20,7 +20,7 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
     correct: 0,
     incorrect: 0,
     incorrectCards: [],
-    incorrectInputs: []
+    inputs: []
   });
 
   useEffect(() => {
@@ -32,13 +32,14 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
     if(answer == shuffledDeck[cardIndex].answer) {
       const newStats = {...statData};
       newStats.correct = statData.correct+1;
+      newStats.inputs.push(answer);
       setStatData(newStats);
     }
     else {
       const newStats = {...statData};
       newStats.incorrect = statData.incorrect+1;
-      newStats.incorrectCards.push(shuffledDeck[cardIndex].id-1);
-      newStats.incorrectInputs.push(answer);
+      newStats.incorrectCards.push(cardIndex);
+      newStats.inputs.push(answer);
       setStatData(newStats);
     }
     setAnswer('');
@@ -50,12 +51,12 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
     }
   }
   
+  if(isFinished) return <EndQuiz stats={statData} deck={shuffledDeck} />
   return (
     <div>
-        {isFinished && <EndQuiz stats={statData} />}
         <Navbar />
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-col justify-center">
-            <h1 className="text-xl my-10">12 cards remaining</h1>
+            <h1 className="text-xl my-10">{cardIndex+1} out of {shuffledDeck.length} cards</h1>
             <div className="relative shadow-xl sm:rounded-2xl sm:overflow-hidden">
                 <div className="absolute inset-0">
                     <div className="absolute inset-0 bg-[#F5D9D9] mix-blend-multiply" />
