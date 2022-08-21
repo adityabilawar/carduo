@@ -40,8 +40,8 @@ const Room = () => {
 		  <div className="p-20 text-2xl">
 			  <h1>Teach It</h1>
 			  <div className="text-lg mt-10 h-[600px] w-[1260px] bg-[#ECECEC] p-10 flex justify-start rounded-lg overflow-y-auto space-y-2 flex-col">
-          {chatLogs.map((msg) => (
-            <div className="flex bg-blue-500 text-white rounded-lg min-h-[80px] w-full justify-center items-start px-10 flex-col">
+          {chatLogs.map((msg, i) => (
+            <div className="flex bg-blue-500 text-white rounded-lg min-h-[80px] w-full justify-center items-start px-10 flex-col" key={i}>
                 <p className="text-sm">{msg.user}</p>
                 <p>{msg.text}</p>
 				      </div>
