@@ -37,7 +37,7 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
     else {
       const newStats = {...statData};
       newStats.incorrect = statData.incorrect+1;
-      newStats.incorrectCards.push(cardIndex);
+      newStats.incorrectCards.push(shuffledDeck[cardIndex].id-1);
       newStats.incorrectInputs.push(answer);
       setStatData(newStats);
     }
