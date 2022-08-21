@@ -25,7 +25,7 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
 
   useEffect(() => {
     if(!isUserAuth(localStorage)) router.push('/register');
-    if(shuffledDeck == deck.questions) setDeck(shuffle(deck.questions));
+    if(shuffledDeck[0] === deck.questions[0]) setDeck(shuffle(deck.questions));
   }, []);
 
   const submitAnswer = () => {
