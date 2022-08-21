@@ -33,6 +33,10 @@ const faqs = [
   
 
 const EndQuiz = () => {
+
+  const handleClick = () => {
+    location.reload();
+  }
   return (
     <div className="absolute top-0 bottom-0 right-0 left-0 z-[10] bg-white flex flex-col justify-center items-center">
         <div className="max-w-8xl mx-auto sm:px-6 lg:px-8 flex flex-col justify-center space-y-5">
@@ -68,9 +72,7 @@ const EndQuiz = () => {
                 <Link href="/dashboard">
                     <button className="btn text-white">Return home</button>
                 </Link>
-                <Link href="/deck/0">
-                    <button className="btn text-white">Try again</button>
-                </Link>
+                <button className="btn text-white" onClick={handleClick}>Try again</button>
             </div>
         </div>
     </div>
