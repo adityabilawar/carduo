@@ -7,6 +7,7 @@ import { isUserAuth } from '../../utils/auth';
 import data from '../../data/decks.json';
 import { InferGetServerSidePropsType, GetServerSideProps } from 'next';
 const deckJSON = data as DeckData[];
+const bool = false;
 
 const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
   
@@ -26,7 +27,7 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
   useEffect(() => {
     if(!isUserAuth(localStorage)) router.push('/register');
     if(shuffledDeck[0] === deck.questions[0]) setDeck(shuffle(deck.questions));
-  }, []);
+  }, [shuffledDeck]);
 
   const submitAnswer = () => {
     if(answer == shuffledDeck[cardIndex].answer) {
@@ -78,7 +79,8 @@ const Quiz = ({ id }: InferGetServerSidePropsType<GetServerSideProps>) => {
 
 // shuffle array - Simple Sort Algorithm
 const shuffle = (arr: Card[]) => {
-  return arr.sort(() => Math.random() - 0.5);
+  if(!bool) return arr.sort(() => Math.random() - 0.5);
+  else return arr;
 }
 
 export const getServerSideProps: GetServerSideProps = async(context) => {
