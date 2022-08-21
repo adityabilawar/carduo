@@ -31,15 +31,15 @@ const faqs = [
     return classes.filter(Boolean).join(' ')
   }
 
-  interface checkCorrect {
-    "correct": number,
-    "incorrect": number,
-    "incorrectCards": number[],
-    "incorrectInputs": string[]
+  interface statData {
+    correct: number,
+    incorrect: number,
+    incorrectCards: number[],
+    incorrectInputs: string[]
   }
   
 
-const EndQuiz = (statProps: checkCorrect) => {
+const EndQuiz = (props: { stats: statData }) => {
   const handleClick = () => {
     location.reload();
   }
@@ -47,7 +47,7 @@ const EndQuiz = (statProps: checkCorrect) => {
     <div className="absolute top-0 bottom-0 right-0 left-0 z-[10] bg-white flex flex-col justify-center items-center">
         <div className="max-w-8xl mx-auto sm:px-6 lg:px-8 flex flex-col justify-center space-y-5">
             <h1 className="text-xl">Completed</h1>
-            <h1 className="text-3xl">Your score: {statProps.correct} / {statProps.correct + statProps.incorrect}</h1>
+            <h1 className="text-3xl">Your score: {props.stats.correct} / {props.stats.correct + props.stats.incorrect}</h1>
             <div className="relative border overflow-y-auto flex flex-wrap p-5 min-w-[80rem] max-w-[80rem] min-h-[500px] max-h-[500px]">
                 <dl className="mt-6 space-y-2 w-full">
                     {faqs.map((faq) => (
