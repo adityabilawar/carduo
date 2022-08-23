@@ -8,19 +8,9 @@ const socketHandler = (req: NextApiRequest, res: any) => {
 		
 		// video/audio chat implementation in the future
 		io.on('connection', socket => {
-			socket.on("join-room", (signal) => {
-				console.log('room joined');
-				socket.broadcast.emit("user-connected", signal);
-			});
-
-			socket.on('connection-create', (signal) => {
-				socket.broadcast.emit('connectionCreated', signal);
-			});
-
-			socket.on('disconnect', () => {
-				socket.broadcast.emit('user-disconnected');
-			});
-			
+			socket.on("createdMessage", (msg) =>
+				socket.broadcast.emit("newMessage", msg)
+			);
 		});
 
 	}
