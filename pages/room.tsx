@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../components/Navbar'
 import io, { Socket } from "socket.io-client"
 import Link from 'next/link';
+import router from 'next/router';
+import { isUserAuth } from '../utils/auth';
 
 let socket: Socket;
 
@@ -21,6 +23,7 @@ const Room = () => {
   useEffect(() => {
     if(effectRan.current) return;
 
+    if(!isUserAuth(localStorage)) router.push('/register');
     setUser(JSON.parse(localStorage.getItem('auth')).name);
     initSocket();
     return () => { effectRan.current = true };
