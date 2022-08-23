@@ -6,8 +6,7 @@ const socketHandler = (req: NextApiRequest, res: any) => {
 		const io = new Server(res.socket.server);
 		res.socket.server.io = io;
 		
-		// buggy when self-hosted, can easily be improved in the future
-		// ^ even with video and audio chat
+		// video/audio chat implementation in the future
 		io.on('connection', socket => {
 			socket.on("join-room", (signal) => {
 				console.log('room joined');
