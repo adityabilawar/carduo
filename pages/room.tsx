@@ -22,8 +22,11 @@ const Room = () => {
 
   useEffect(() => {
     if(effectRan.current) return;
-
-    if(!isUserAuth(localStorage)) router.push('/register');
+    if(!isUserAuth(localStorage)) {
+      router.push('/register');
+      return;
+    };
+    
     setUser(JSON.parse(localStorage.getItem('auth')).name);
     initSocket();
     return () => { effectRan.current = true };
