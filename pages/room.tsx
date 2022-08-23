@@ -4,36 +4,41 @@ import io, { Socket } from "socket.io-client"
 import Link from 'next/link';
 
 let socket: Socket;
+
+interface Message {
+  user: string,
+  message: string
+}
+
 // WILL IMPLEMENT VIDEO CHAT FOR TEACHING IN THE FUTURE
 const Room = () => {
 
   const [user, setUser] = useState('');
-  const [text, setText] = useState('');
-  const [chatLogs, setChatLogs] = useState([]);
+  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState<Message[]>([]);
+  const effectRan = useRef(false);
+
+  useEffect(() => {
+    if(effectRan.current) return;
+
+    setUser(JSON.parse(localStorage.getItem('auth')).name);
+    initSocket();
+    return () => { effectRan.current = true };
+  }, []);
 
 	const initSocket = async () => {
     await fetch('/api/socket');
     socket = io();
-    socket.on('connect', () => {
-      console.log('socket connected from client');
-    });
-    socket.on('chat', (data) => {
-      const newChatLogs = chatLogs;
-      newChatLogs.push(data);
-      setChatLogs(newChatLogs);
-    })
+    socket.on('newMessage', (msg: Message) => 
+      setMessages((currentMsg) => [...currentMsg,msg])
+    );
   }
 
-  const sendMessage = (e) => {
-    e.preventDefault();
-    
-    socket.emit('chat', { user, text });
+  const sendMessage = async(e) => {
+    socket.emit('createdMessage', { user, message });
+    setMessages((currentMsg) => [...currentMsg, {user,message}]);
+    setMessage("");
   }
-
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem('auth')).name);
-    initSocket();
-  }, []);
 
   return (
 	  <div>
@@ -41,14 +46,14 @@ const Room = () => {
 		  <div className="p-20 text-2xl">
 			  <h1>Teach It</h1>
 			  <div className="text-lg mt-10 h-[600px] w-[1260px] bg-[#ECECEC] p-10 flex justify-start rounded-lg overflow-y-auto space-y-2 flex-col">
-          {chatLogs.map((msg, i) => (
-            <div className="flex bg-blue-500 text-white rounded-lg min-h-[80px] w-full justify-center items-start px-10 flex-col" key={i}>
+          {messages.map((msg, i) => (
+            <div className={`flex ${(msg.user == user) ? "bg-blue-500" : "bg-red-500"} text-white rounded-lg p-5 w-full justify-center items-start px-10 flex-col`} key={i}>
                 <p className="text-sm">{msg.user}</p>
-                <p>{msg.text}</p>
+                <p>{msg.message}</p>
 				      </div>
           ))}
 			  </div>
-			  <input className="border-gray-200 text-md" placeholder="Type here" onChange={(e) => setText(e.target.value)} value={text} />
+			  <input className="border-gray-200 text-md" placeholder="Type here" onChange={(e) => setMessage(e.target.value)} value={message} />
 			  <button className="btn text-white mt-5 mx-5" onClick={(e) => sendMessage(e)}>Send</button>
         <Link href='/deck/0'>
           <button className="btn text-white mt-5">Take quiz</button>
