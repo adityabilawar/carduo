@@ -9,9 +9,19 @@ const socketHandler = (req: NextApiRequest, res: any) => {
 		// buggy when self-hosted, can easily be improved in the future
 		// ^ even with video and audio chat
 		io.on('connection', socket => {
-			socket.on("createdMessage", (msg) =>
-				socket.broadcast.emit("newMessage", msg)
-			);
+			socket.on("join-room", (signal) => {
+				console.log('room joined');
+				socket.broadcast.emit("user-connected", signal);
+			});
+
+			socket.on('connection-create', (signal) => {
+				socket.broadcast.emit('connectionCreated', signal);
+			});
+
+			socket.on('disconnect', () => {
+				socket.broadcast.emit('user-disconnected');
+			});
+			
 		});
 
 	}
